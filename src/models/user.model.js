@@ -51,8 +51,8 @@ const userSchema=new Schema(
 
 //password ko incrypt tabhi kare jab change hua ho ya phile bar banaya ho
 userSchema.pre("save",async function (next) {
-    if (!this.isModified("password")) return next()  //har bar password na update ho
-    this.password=bcrypt.hash(this.password,10)
+    if (!this.isModified("password")) return next();  //har bar password na update ho
+    this.password = await bcrypt.hash(this.password,10)
     next()
 })
 
