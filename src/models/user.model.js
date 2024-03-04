@@ -1,6 +1,6 @@
 import mongoose,{Schema} from "mongoose";
 
-import jwt from "jsonwentoken"
+import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 
 const userSchema=new Schema(
@@ -28,7 +28,7 @@ const userSchema=new Schema(
         },        
         avtar:{
             type:String,  //cloudinary url and its free
-            required:true,
+            //required:true,
         },
         coverImage:{
             type:String,//cloudinary
@@ -57,6 +57,8 @@ userSchema.pre("save",async function (next) {
 })
 
 userSchema.methods.isPasswordCorrect=async function(password){
+    console.log(password)
+    console.log(this.password)
     return await bcrypt.compare(password,this.password)
 }
 
